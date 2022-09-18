@@ -5,6 +5,8 @@ import com.example.springquick.service.ProductService;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +17,7 @@ public class ProductsController {
 
     private final ProductService productService;
 
-    @RequestMapping("/products")
+    @GetMapping("/products")
     public String viewProducts(Model model) {
         var products = productService.findAll();
         model.addAttribute("products", products);
@@ -23,8 +25,7 @@ public class ProductsController {
         return "products.html";
     }
 
-    @RequestMapping(path = "/products",
-                    method = RequestMethod.POST)
+    @PostMapping("/products")
     public String addProduct(
             @RequestParam String name,
             @RequestParam double price,
