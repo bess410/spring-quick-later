@@ -1,15 +1,15 @@
 package com.example.springquick.service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-@Setter
-@Getter
+@Data
 @Component
 @RequestScope
 public class LoginProcessor {
+
+    private final LoggedUserManagementService loggedUserManagementService;
 
     private String username;
     private String password;
@@ -18,6 +18,12 @@ public class LoginProcessor {
         String username = this.getUsername();
         String password = this.getPassword();
 
-        return "natalie".equals(username) && "password".equals(password);
+        boolean loginResult = false;
+        if ("natalie".equals(username) && "password".equals(password)) {
+            loginResult = true;
+            loggedUserManagementService.setUsername(username);
+        }
+
+        return loginResult;
     }
 }
