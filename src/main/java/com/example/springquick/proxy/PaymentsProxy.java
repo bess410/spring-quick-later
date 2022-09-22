@@ -18,7 +18,7 @@ import java.util.UUID;
 @Component
 public class PaymentsProxy {
 
-    private final RestTemplate rest = new RestTemplate();
+    private final RestTemplate rest;
 
     @Value("${name.service.url}")
     private String paymentsServiceUrl;
