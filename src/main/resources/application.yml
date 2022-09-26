@@ -3,3 +3,11 @@ server:
 name:
   service:
     url: http://localhost:8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      mode: always
