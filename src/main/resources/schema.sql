@@ -1,5 +1,5 @@
-create table if not exists purchase (
+create table if not exists account (
     id serial primary key,
-    product varchar(50) not null,
-    price decimal not null
+    name varchar(50) not null,
+    amount decimal not null
 );

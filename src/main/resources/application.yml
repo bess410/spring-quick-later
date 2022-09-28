@@ -5,7 +5,7 @@ name:
     url: http://localhost:8080
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
   sql:
@@ -13,6 +13,6 @@ spring:
       mode: always
 custom:
   datasource:
-    url: jdbc:postgresql://localhost:5433/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
