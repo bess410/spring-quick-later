@@ -15,7 +15,7 @@ public class TransferService {
 
     private final AccountRepository accountRepository;
 
-    @Transactional
+//    @Transactional
     public void transferMoney(long idSender, long idReceiver, BigDecimal amount) {
         Account sender = accountRepository.findAccountById(idSender);
         Account receiver = accountRepository.findAccountById(idReceiver);
@@ -24,6 +24,9 @@ public class TransferService {
         BigDecimal receiverNewAmount = sender.getAmount().add(amount);
 
         accountRepository.changeAmount(idSender, senderNewAmount);
+        if (true) {
+            throw new RuntimeException();
+        }
         accountRepository.changeAmount(idReceiver, receiverNewAmount);
     }
 
