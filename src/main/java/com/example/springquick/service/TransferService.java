@@ -1,5 +1,6 @@
 package com.example.springquick.service;
 
+import com.example.springquick.exception.AccountNotFoundException;
 import com.example.springquick.model.Account;
 import com.example.springquick.repository.AccountRepository;
 import lombok.Data;
@@ -15,22 +16,23 @@ public class TransferService {
 
     private final AccountRepository accountRepository;
 
-//    @Transactional
+    @Transactional
     public void transferMoney(long idSender, long idReceiver, BigDecimal amount) {
-        Account sender = accountRepository.findAccountById(idSender);
-        Account receiver = accountRepository.findAccountById(idReceiver);
+        Account sender = accountRepository.findById(idSender).orElseThrow(AccountNotFoundException::new);
+        Account receiver = accountRepository.findById(idReceiver).orElseThrow(AccountNotFoundException::new);
 
         BigDecimal senderNewAmount = sender.getAmount().subtract(amount);
-        BigDecimal receiverNewAmount = sender.getAmount().add(amount);
+        BigDecimal receiverNewAmount = receiver.getAmount().add(amount);
 
         accountRepository.changeAmount(idSender, senderNewAmount);
-        if (true) {
-            throw new RuntimeException();
-        }
         accountRepository.changeAmount(idReceiver, receiverNewAmount);
     }
 
-    public List<Account> getAllAccounts() {
-        return accountRepository.findAllAccounts();
+    public Iterable<Account> getAllAccounts() {
+        return accountRepository.findAll();
+    }
+
+    public List<Account> findAccountsByName(String name) {
+        return accountRepository.findAccountsByName(name);
     }
 }
